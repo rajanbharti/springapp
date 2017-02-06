@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
+    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post" class="form-inline">
+    <div class="form-group">
+        <label>ID</label>
+        <input type="text" class="form-control" th:field="*{id}"/>
+        <label>Content</label>
+        <input type="text" class="form-control" th:field="*{content}"/>
+        <input type="submit" value="Submit" class="form-control"/>
+        <input type="reset" value="Reset" class="form-control"/>
+    </div>
+</form>
+</body>
+</html>
