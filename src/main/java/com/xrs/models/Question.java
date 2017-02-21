@@ -1,31 +1,29 @@
 package com.xrs.models;
 
-import com.sun.javafx.beans.IDProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by rajan on 24/1/17.
  */
 @Entity
 @Table(name = "questions")
+@IdClass(QuestionId.class)
 public class Question {
-    @Id
-    private String qId;
 
+    @Id
+    private int qId;
 
     @Id
     private String courseId;
+
     private String question;
     private String answer;
 
-    public String getqId() {
+    public int getqId() {
         return qId;
     }
 
-    public void setqId(String qId) {
+    public void setqId(int qId) {
         this.qId = qId;
     }
 
@@ -53,4 +51,25 @@ public class Question {
         this.answer = answer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Question question1 = (Question) o;
+
+        if (qId != question1.qId) return false;
+        if (!courseId.equals(question1.courseId)) return false;
+        if (!question.equals(question1.question)) return false;
+        return answer.equals(question1.answer);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = qId;
+        result = 31 * result + courseId.hashCode();
+        result = 31 * result + question.hashCode();
+        result = 31 * result + answer.hashCode();
+        return result;
+    }
 }

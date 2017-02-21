@@ -20,15 +20,17 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class StudentDao  {
+public class StudentDao {
 
     @Autowired
     private IStudentDao studentDao;
 
     public boolean authenticate(Student student) {
         Student fetched = studentDao.findOne(student.getID());
-     //   String hashed = BCrypt.hashpw(student.getPassword(),"test");
-        return (BCrypt.checkpw(student.getPassword(), fetched.getPassword()));
+        if (fetched != null)
+            return (BCrypt.checkpw(student.getPassword(), fetched.getPassword()));
+        else
+            return false;
     }
 
     public void addStudent(Student student) {
@@ -37,11 +39,9 @@ public class StudentDao  {
         studentDao.save(student);
     }
 
-    public void removeAll(){
+    public void removeAll() {
         studentDao.deleteAll();
     }
-
-
 
 
 }

@@ -5,4 +5,4 @@ CREATE TABLE questions(qid INT, cid INT,question TEXT,isMCQ TINYINT(1),PRIMARY K
 
 CREATE TABLE answers(qid INT,cid INT,answer TEXT,PRIMARY KEY(qid,cid));
 
-CREATE TABLE qoptions(qid INT,cid INT,ops SET())
+CREATE TABLE options(question_id INT,course_id VARCHAR(7),ops SET())

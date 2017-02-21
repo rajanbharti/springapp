@@ -14,12 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminDao {
 
     @Autowired
+    private
     IAdminDao adminDao;
 
     public String autheticate(Admin admin) {
         Admin fetched = adminDao.findOne(admin.getId());
-        if (BCrypt.checkpw(admin.getPassword(), fetched.getPassword()))
-            return fetched.getAdminType();
+        if(fetched!=null) {
+            if (BCrypt.checkpw(admin.getPassword(), fetched.getPassword()))
+                return fetched.getAdminType();
+            else
+                return "NA";
+        }
         else
             return "NA";
     }
